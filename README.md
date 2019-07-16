@@ -10,8 +10,7 @@ This repository contains speech-driven gesture generation neural network impleme
 
 ### install packages
 ```sh
-pip install tensorflow-gpu # if you have GPU
-# pip install tensorflow  #if you don't have GPU
+pip install tensorflow
 pip install -r requirements.txt
 ```
 
@@ -33,7 +32,7 @@ We write all the parameters which needs to be specified by a user in the capsloc
 
 **If you don't want to customize anything - you can skip reading about steps 4-7 and just use already prepared scripts at the folder `example_scripts`**
 
-## 4. Learn motion representation by AutoEncoder
+## 2. Learn motion representation by AutoEncoder
 
 Create a directory to save training checkpoints such as `chkpt/` and use it as CHKPT_DIR parameter.
 #### Learn dataset encoding
@@ -53,7 +52,7 @@ python motion_repr_learning/ae/encode_dataset.py DATA_DIR -chkpt_dir=CHKPT_DIR -
 More information can be found in the folder `motion_repr_learning` 
 
 
-## 5. Learn speech-driven gesture generation model
+## 3. Learn speech-driven gesture generation model
 
 ```sh
 python train.py MODEL_NAME EPOCHS DATA_DIR N_INPUT ENCODE DIM
@@ -65,7 +64,7 @@ python train.py MODEL_NAME EPOCHS DATA_DIR N_INPUT ENCODE DIM
 # DIM = how many dimension does encoding have (ignored if you don't encode)
 ```
 
-## 6. Predict gesture
+## 4. Predict gestures
 
 ```sh
 python predict.py MODEL_NAME INPUT_SPEECH_FILE OUTPUT_GESTURE_FILE
@@ -85,12 +84,12 @@ python motion_repr_learning/ae/decode.py DATA_DIR ENCODED_PREDICTION_FILE DECODE
 Note: This can be used in a for loop over all the test sequences. Examples are provided in the 
 `example_scripts` folder of this directory
 
-## 7. Quantitative evaluation
+## 5. Quantitative evaluation
 Use scripts in the `evaluation` folder of this directory.
 
 Examples are provided in the `example_scripts` folder of this repository
 
-## 8. Qualitative evaluation
+## 6. Qualitative evaluation
 Use script model_animator.py
 
 &nbsp;

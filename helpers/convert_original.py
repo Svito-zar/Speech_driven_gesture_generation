@@ -7,10 +7,15 @@ import sys
 
 sys.path.insert(1, os.path.join(sys.path[0], '..'))
 
+print(sys.path[0])
+
+
+sys.path.insert(0, '../data_processing/bvh_read/BVH_io')
+
+from data_processing.bvh_read.BVH_io import bvh2npy
+
 import numpy as np
 import pyquaternion as pyq
-from data_processing.bvh_read.BVH import load
-from data_processing.bvh_read.Animation import Animation
 
 
 def rotation_to_position(frames, nodes):
@@ -112,9 +117,11 @@ def main():
 
     for bvh_path in bvh_paths:
         print('Process "{}"'.format(bvh_path))
-        animation, _, _ = load(bvh_path)
-        positions = np.array(animation.positions)
-        out_data = np.reshape(positions, (positions.shape[0], positions.shape[1]*positions.shape[2]))
+
+        Hand_joints = ['Head', 'RightShoulder', 'RightArm', 'RightForeArm', 'RightHand', 'LeftArm', 'LeftForeArm',
+                       'LeftHand']
+        out_data = bvh2npy(bvh_path, Hand_joints, hips_centering=True)
+
         gesture_name, _ = os.path.splitext(os.path.basename(bvh_path))
         out_path = os.path.join(args.out, 'gesture'+gesture_name[-1] + '.txt')
         np.savetxt(out_path, out_data, fmt='%s')

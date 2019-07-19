@@ -8,10 +8,7 @@ import os
 import os.path
 import sys
 
-
-module_path = os.path.abspath(os.path.join('/home/taras/Desktop/Work/Code/Git/My_Fork/Speech_driven_gesture_generation_with_autoencoder/'))
-if module_path not in sys.path:
-    sys.path.append(module_path)
+sys.path.insert(0, './data_processing/bvh_read/PyMO')
 
 from data_processing.bvh_read.BVH_io import bvh2npy
 from data_processing.tools import *

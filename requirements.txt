@@ -10,4 +10,3 @@ python_speech_features
 pydub
 pysptk
 librosa
-pyreaper
